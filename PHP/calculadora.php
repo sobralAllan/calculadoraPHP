@@ -5,6 +5,12 @@
     $a = 1;
     $b = -8;
     $c = 12;
+    $decimal = 0;
+    $binario = 0;
+    $decimal = 0;
+    $n = 1000;
+    $q = 1;
+    $r = 0;
 
     //Operações
     function soma($num1, $num2){
@@ -67,6 +73,138 @@
         }//fim do if else
     }//fim do calcular
 
+    function binarioDecimal($binario){
+        $tamanho = strlen($binario);
+        $contador = $tamanho - 1;
+        for($i = 0; $i < $tamanho; $i++){
+            if(substr($binario,$i,1) == 1){
+                $decimal += pow(2,$contador);
+            }
+            $contador--;
+        }//fim do for
+        return $decimal;
+    }//fim do binário para decimal
+
+    function decimalBinario($decimal){
+        while($decimal >= 1){
+            $binario .= $decimal % 2;
+            $decimal = $decimal / 2;
+        };
+        return $binario;
+    }//fim do binário para decimal
+
+    function fibonacci($n){
+        $ant = 0;
+        $pro = 1;
+        $res = 0;
+        $msg = $ant." ".$pro;
+        for($i = 0; $i <= $n; $i++){
+            $res = $ant + $pro;
+            $msg .= " ".$res;
+            $ant = $pro;
+            $pro = $res; 
+        }
+        return $msg;
+    }
+
+    function converter($valor){
+        switch($valor){
+            case 10:
+                return "A";
+                break;
+            case 11:
+                return "B";
+                break;
+            case 12:
+                return "C";
+                break;
+            case 13:
+                return "D";
+                break;
+            case 14:
+                return "E";
+                break;
+            case 15:
+                return "F";
+                break;
+            default:
+                return "Erro";
+                break;
+        }
+    }//fim do converter
+
+    function converterDois($valor){
+        switch($valor){
+            case "A":
+                return 10;
+                break;
+            case "B":
+                return 11;
+                break;
+            case "C":
+                return 12;
+                break;
+            case "D":
+                return 13;
+                break;
+            case "E":
+                return 14;
+                break;
+            case "F":
+                return 15;
+                break;
+            default:
+                return $valor;
+                break;
+        }
+    }//fim do converter
+
+    //Exercício 04
+    function decimalHexadecimal($decimal){
+        $q = 1;
+        $r = 0;
+        $msg = "";
+        while($q >= 1){
+            $q = $decimal / 16;//O resultado da operação
+            $r = $decimal % 16;//O resto da divisão
+            $decimal = $q;
+            if($r > 9){
+                $r = converter($r);
+            }
+            $msg .= $r;
+        }
+        return strrev($msg);
+    }//fim
+
+    function hexadecimalDecimal($hexadecimal){
+        $tamanho = strlen($hexadecimal);//Medindo o tamanho da palavra
+        $caracter = "";
+        $res = 0;
+        for($i=$tamanho-1;$i >= 0; $i--){
+            $caracter = substr($hexadecimal,$i,1);
+            $caracter = converterDois($caracter);
+            echo "<br>".pow(16,$i);
+            $res += $caracter * pow(16,$i);
+            
+        }
+        return $res;
+    }//fim
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //Eu uso para escrever na tela o elemento echo
     echo " <br>A soma de $num1 e $num2 é: ".soma($num1,$num2);
     echo " <br>A subtração de $num1 e $num2 é: ".subtracao($num1,$num2);
@@ -78,6 +216,10 @@
     echo " <br>O valor de delta é: ".calcularDelta($a,$b,$c);
     echo " <br>O valor de X1 é: ".calcularX1($a,$b,$c);
     echo " <br>O valor de X2 é: ".calcularX2($a,$b,$c);
-
+    echo " <br>".binarioDecimal(10001001);
+    echo " <br>".decimalBinario(50);
+    echo " <br>".fibonacci(10);
+    echo " <br><br>Decimal para Hexadecimal: ".decimalHexadecimal(5325);
+    echo " <br><br>Hexadecimal para Decimal: ".Hexadecimaldecimal("14CD");
 ?>
 
